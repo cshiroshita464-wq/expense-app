@@ -1,0 +1,14 @@
+@model ExpenseApp.Models.Expense
+
+<h1>支出削除</h1>
+
+<p>本当に削除しますか？</p>
+
+<p>金額：@Model.Amount.ToString("0") 円</p>
+<p>カテゴリ：@Model.Category</p>
+<p>メモ：@Model.Memo</p>
+
+<form method="post">
+    <input type="hidden" asp-for="Id">
+    <button type="submit">削除する</button>
+</form>

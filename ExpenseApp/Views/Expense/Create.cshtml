@@ -1,0 +1,28 @@
+@model ExpenseApp.Models.Expense
+
+<h1>支出追加</h1>
+
+<form method="post">
+    <div>
+        <label>日付</label>
+        <input asp-for="Date" type="date">
+    </div>
+    <div>
+        <label>金額</label>
+        <input asp-for="Amount">
+    </div>
+
+    <div>
+        <label>カテゴリ</label>
+        <input asp-for="Category">
+    </div>
+
+    <div>
+        <label>メモ</label>
+        <input asp-for="Memo">
+    </div>
+
+    <button type="submit">追加</button>
+</form>
+
+<hr>

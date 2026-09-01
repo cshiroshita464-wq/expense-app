@@ -1,0 +1,94 @@
+@model ExpenseApp.Models.ExpenseIndexViewModel
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="mb-1">@Model.Year 年 @Model.Month 月の支出</h1>
+            <p class="text-muted mb-0">今月の支出一覧</p>
+        </div>
+
+        <a asp-action="Create" class="btn btn-primary">
+            支出を追加
+        </a>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">今月の合計</h5>
+            <p class="fs-3 fw-bold mb-0">
+                @Model.Total.ToString("0") 円
+            </p>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-2">
+                <div class="col-md-8">
+                    <input
+                        type="text"
+                        name="category"
+                        class="form-control"
+                        placeholder="カテゴリを入力">
+                </div>
+
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-outline-primary w-100">
+                        検索
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            支出詳細
+        </div>
+
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>日付</th>
+                        <th>カテゴリ</th>
+                        <th>メモ</th>
+                        <th class="text-end">金額</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (ExpenseApp.Models.Expense expense in Model.Expenses)
+                    {
+                        <tr>
+                            <td>@expense.Date.ToString("yyyy/MM/dd")</td>
+                            <td>@expense.Category</td>
+                            <td>@expense.Memo</td>
+                            <td class="text-end">
+                                @expense.Amount.ToString("0") 円
+                            </td>
+                            <td class="text-end">
+                                <a
+                                    asp-action="Edit"
+                                    asp-route-id="@expense.Id"
+                                    class="btn btn-sm btn-outline-secondary">
+                                    編集
+                                </a>
+
+                                <a
+                                    asp-action="Delete"
+                                    asp-route-id="@expense.Id"
+                                    class="btn btn-sm btn-outline-danger">
+                                    削除
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
